@@ -6,7 +6,7 @@ import logo from "../../assets/logo.png"
 export default function Header() {
     return (
         <header className='myheader'>
-            <Image size='mini' src={logo} alt="logo orecipes" />
+            <img src={logo} alt="logo orecipes" />
             <form action="">
                 <Input type="email" placeholder="email" />
                 <Input type="password" placeholder="password" />

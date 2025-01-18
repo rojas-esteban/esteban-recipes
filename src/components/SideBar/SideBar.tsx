@@ -1,14 +1,28 @@
 import './SideBar.scss'
-export default function SideBar() {
+
+interface SideBarProps {
+    recipes: IRecipe[]
+}
+
+
+
+export default function SideBar({ recipes }: SideBarProps) {
     return (
         <nav className='sidebar'>
             <ul>
                 <li>
-                    <a href="#">cookies</a>
+                    <a href="/">Menu</a>
                 </li>
-                <li>
-                    <a href="#">macarons</a>
-                </li>
+
+                {recipes.map(
+                    (recipe) => (
+                        <li key={recipe.id}>
+                            <a href="#">{recipe.title}</a>
+                        </li>
+                    )
+                )}
+
+
             </ul>
         </nav>
     );
