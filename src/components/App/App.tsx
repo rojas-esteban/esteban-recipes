@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./App.scss"
-import axios from "axios";
 import { Route, Routes, useLocation } from "react-router";
 
 // sous composants
@@ -10,18 +9,21 @@ import MainPage from "../pages/MainPage";
 import LoaderExampleText from "../Loader/Loader";
 import RecipePage from "../pages/RecipePage";
 import NotFoundPage from "../pages/!notFoundPage";
+import { axiosInstance } from "../../axios/aciosInstance";
+import FavPage from "../pages/FavPage";
 
 function App() {
 
     const [recipes, setRecipes] = useState<IRecipe[]>([])
     const [isLoading, setIsLoading] = useState(true)
+    const [isLogged, setIsLogged] = useState(false)
 
 
     useEffect(
         () => {
             const getRecipes = async () => {
                 try {
-                    const response = await axios.get("https://orecipesapi.onrender.com/api/recipes")
+                    const response = await axiosInstance.get("/recipes")
                     //console.log(response.data);
                     setRecipes(response.data)
 
@@ -51,17 +53,17 @@ function App() {
     return (
         <div className="app">
 
-
-            <SideBar recipes={recipes} />
+            <SideBar recipes={recipes} isLogged={isLogged} />
 
             <div className="rightbloc">
-                <Header />
+                <Header isLogged={isLogged} setIsLogged={setIsLogged} />
                 {isLoading && <LoaderExampleText />}
                 <Routes >
 
                     <Route path="/" element={<MainPage recipes={recipes} />} />
                     <Route path="/recipes/:slug" element={<RecipePage />} />
                     <Route path="/*" element={<NotFoundPage />} />
+                    <Route path="/fav" element={<FavPage />} />
 
                 </Routes>
 

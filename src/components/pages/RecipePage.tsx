@@ -1,7 +1,7 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { Navigate, useParams } from "react-router"
 import LoaderExampleText from "../Loader/Loader";
+import { axiosInstance } from "../../axios/aciosInstance";
 
 
 
@@ -22,7 +22,7 @@ export default function RecipePage() {
         //console.log('heeeeeeeeeeer');
         const getRecipe = async () => {
             try {
-                const response = await axios.get(`https://orecipesapi.onrender.com/api/recipes/${urlSlug}`)
+                const response = await axiosInstance.get(`/recipes/${urlSlug}`)
                 //console.log(response.data);
                 setSelectedRecipe(response.data)
                 setIsLoading(false)
