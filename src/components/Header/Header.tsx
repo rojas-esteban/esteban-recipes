@@ -4,6 +4,7 @@ import logo from "../../assets/logo.png"
 import { addTokenToInstance, axiosInstance, removeTokenFromInstance } from '../../axios/aciosInstance';
 import { useNavigate } from 'react-router';
 import { removeTokenFromLocalstorage, saveTokenToLocalStorage } from '../../localstorage/localstorage';
+import { useState } from 'react';
 
 interface HeaderProps {
     isLogged: boolean,
@@ -14,6 +15,7 @@ interface HeaderProps {
 
 export default function Header({ isLogged, setIsLogged }: HeaderProps) {
 
+    const [pseudo, setPseudo] = useState("")
 
 
 
@@ -28,7 +30,9 @@ export default function Header({ isLogged, setIsLogged }: HeaderProps) {
             addTokenToInstance(response.data.token) // axiosInstance
             saveTokenToLocalStorage(response.data.token) //localStorage
             setIsLogged(true)
-            //console.log(response.data.token);
+            setPseudo(response.data.pseudo)
+
+            console.log(response.data.pseudo);
         } catch (error) {
             console.log(error);
 
@@ -43,12 +47,18 @@ export default function Header({ isLogged, setIsLogged }: HeaderProps) {
 
 
             {isLogged
-                ? (<Button primary type="button" onClick={() => {
-                    removeTokenFromInstance()
-                    removeTokenFromLocalstorage()
-                    setIsLogged(false);
-                    navigate("/");;
-                }} >Déconnecter</Button>)
+                ? (
+                    <div className='logged-div'>
+                        <h1>{pseudo} </h1>
+
+
+                        <Button primary type="button" onClick={() => {
+                            removeTokenFromInstance()
+                            removeTokenFromLocalstorage()
+                            setIsLogged(false);
+                            navigate("/");;
+                        }} >Déconnecter</Button>
+                    </div>)
                 :
                 (<form onSubmit={(eventSubmit) => {
                     eventSubmit.preventDefault();

@@ -12,6 +12,7 @@ import NotFoundPage from "../pages/!notFoundPage";
 import { addTokenToInstance, axiosInstance } from "../../axios/aciosInstance";
 import FavPage from "../pages/FavPage";
 import { getTokenFromLocalStorage } from "../../localstorage/localstorage";
+import Users from "../pages/Users";
 
 function App() {
 
@@ -76,6 +77,8 @@ function App() {
                         <Route path="/recipes/:slug" element={<RecipePage error={error} setError={setError} />} />
                         <Route path="/*" element={<NotFoundPage />} />
                         <Route path="/fav" element={<FavPage />} />
+                        <Route path="/utilisateurs" element={<Users />} />
+
 
                     </Routes>)
 

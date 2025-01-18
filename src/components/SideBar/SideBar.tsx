@@ -26,6 +26,9 @@ export default function SideBar({ recipes, isLogged }: SideBarProps) {
                         </li>
                     )
                 )}
+                <li>
+                    <NavLink to="/utilisateurs" > utilisateurs de test</NavLink>
+                </li>
 
 
             </ul>
