@@ -4,10 +4,12 @@ import Header from "../Header/Header";
 import MainPage from "../pages/MainPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LoaderExampleText from "../Loader/Loader";
 
 function App() {
 
     const [recipes, setRecipes] = useState<IRecipe[]>([])
+    const [isLoading, setIsLoading] = useState(true)
 
 
     useEffect(
@@ -22,6 +24,8 @@ function App() {
                 } catch (error) {
                     console.log(`este es el error : ${error}`);
 
+                } finally {
+                    setIsLoading(false)
                 }
             };
 
@@ -40,6 +44,7 @@ function App() {
 
             <div className="rightbloc">
                 <Header />
+                {isLoading && <LoaderExampleText />}
                 <MainPage recipes={recipes} />
             </div>
 
