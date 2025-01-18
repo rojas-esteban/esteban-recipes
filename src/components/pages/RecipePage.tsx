@@ -3,13 +3,16 @@ import { Navigate, useParams } from "react-router"
 import LoaderExampleText from "../Loader/Loader";
 import { axiosInstance } from "../../axios/aciosInstance";
 
+interface IrecipePage {
+    error: boolean,
+    setError: React.Dispatch<React.SetStateAction<boolean>>,
+}
 
 
-
-export default function RecipePage() {
+export default function RecipePage({ error, setError }: IrecipePage) {
 
     const [selectedRecipe, setSelectedRecipe] = useState<null | IRecipe>(null);
-    const [error, setError] = useState(false)
+    //const [error, setError] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
 
     const params = useParams()

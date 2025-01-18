@@ -9,14 +9,25 @@ import MainPage from "../pages/MainPage";
 import LoaderExampleText from "../Loader/Loader";
 import RecipePage from "../pages/RecipePage";
 import NotFoundPage from "../pages/!notFoundPage";
-import { axiosInstance } from "../../axios/aciosInstance";
+import { addTokenToInstance, axiosInstance } from "../../axios/aciosInstance";
 import FavPage from "../pages/FavPage";
+import { getTokenFromLocalStorage } from "../../localstorage/localstorage";
 
 function App() {
 
     const [recipes, setRecipes] = useState<IRecipe[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [isLogged, setIsLogged] = useState(false)
+    const [error, setError] = useState(false)
+
+    useEffect(() => {
+        const token = getTokenFromLocalStorage();
+
+        if (token) {
+            addTokenToInstance(token);
+            setIsLogged(true);
+        }
+    }, []);
 
 
     useEffect(
@@ -43,7 +54,7 @@ function App() {
 
     //scroll to the top
     const location = useLocation();
-    console.log(location);
+    //console.log(location);
     useEffect(() => {
         // scroll en haut de page
         window.scrollTo(0, 0);
@@ -57,15 +68,19 @@ function App() {
 
             <div className="rightbloc">
                 <Header isLogged={isLogged} setIsLogged={setIsLogged} />
-                {isLoading && <LoaderExampleText />}
-                <Routes >
+                {isLoading ? <LoaderExampleText /> :
 
-                    <Route path="/" element={<MainPage recipes={recipes} />} />
-                    <Route path="/recipes/:slug" element={<RecipePage />} />
-                    <Route path="/*" element={<NotFoundPage />} />
-                    <Route path="/fav" element={<FavPage />} />
+                    (<Routes >
 
-                </Routes>
+                        <Route path="/" element={<MainPage recipes={recipes} />} />
+                        <Route path="/recipes/:slug" element={<RecipePage error={error} setError={setError} />} />
+                        <Route path="/*" element={<NotFoundPage />} />
+                        <Route path="/fav" element={<FavPage />} />
+
+                    </Routes>)
+
+                }
+
 
 
 
