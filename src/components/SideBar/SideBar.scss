@@ -1,0 +1,15 @@
+.sidebar {
+    background-color: #2185d0;
+    color: #FFF;
+    padding: 1rem;
+    width: 25%;
+
+    li {
+        margin: 0.5rem 0;
+    }
+
+    .active {
+        font-weight: bold;
+        background-color: #f0f;
+    }
+}
