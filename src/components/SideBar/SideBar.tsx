@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router';
 import './SideBar.scss'
 
 interface SideBarProps {
@@ -11,13 +12,13 @@ export default function SideBar({ recipes }: SideBarProps) {
         <nav className='sidebar'>
             <ul>
                 <li>
-                    <a href="/">Menu</a>
+                    <NavLink to="/">Menu</NavLink>
                 </li>
 
                 {recipes.map(
                     (recipe) => (
                         <li key={recipe.id}>
-                            <a href="#">{recipe.title}</a>
+                            <NavLink to={`/recipes/${recipe.slug}`}>{recipe.title}</NavLink>
                         </li>
                     )
                 )}

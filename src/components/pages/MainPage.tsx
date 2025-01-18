@@ -1,5 +1,6 @@
 import { Button, Card, CardGroup } from 'semantic-ui-react'
 import "./Page.scss"
+import { Link } from 'react-router'
 
 //En cas d'envoyer une nouvelle prop à ce composant, ajoutez-la à l'interface:
 
@@ -25,7 +26,7 @@ export default function MainPage({ recipes }: MainPageProps) {
                             image={recipe.thumbnail}
                             header={recipe.title}
                             meta={recipe.difficulty}
-                            description={<Button primary>Voir la recette</Button>}
+                            description={<Link to={`/recipes/${recipe.slug}`}>Voir la recette</Link>}
 
                         />
 

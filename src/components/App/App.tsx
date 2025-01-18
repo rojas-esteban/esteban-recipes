@@ -1,10 +1,15 @@
+import { useEffect, useState } from "react";
 import "./App.scss"
+import axios from "axios";
+import { Route, Routes, useLocation } from "react-router";
+
+// sous composants
 import SideBar from "../SideBar/SideBar";
 import Header from "../Header/Header";
 import MainPage from "../pages/MainPage";
-import { useEffect, useState } from "react";
-import axios from "axios";
 import LoaderExampleText from "../Loader/Loader";
+import RecipePage from "../pages/RecipePage";
+import NotFoundPage from "../pages/!notFoundPage";
 
 function App() {
 
@@ -32,8 +37,15 @@ function App() {
             getRecipes()
 
         }, []
-    )
+    );
 
+    //scroll to the top
+    const location = useLocation();
+    console.log(location);
+    useEffect(() => {
+        // scroll en haut de page
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
 
 
     return (
@@ -45,7 +57,16 @@ function App() {
             <div className="rightbloc">
                 <Header />
                 {isLoading && <LoaderExampleText />}
-                <MainPage recipes={recipes} />
+                <Routes >
+
+                    <Route path="/" element={<MainPage recipes={recipes} />} />
+                    <Route path="/recipes/:slug" element={<RecipePage />} />
+                    <Route path="/*" element={<NotFoundPage />} />
+
+                </Routes>
+
+
+
             </div>
 
         </div>
