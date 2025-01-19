@@ -1,4 +1,4 @@
-import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
+import { Loader, Image, Segment } from 'semantic-ui-react'
 import parag from '../../assets/paragraph.png'
 
 const LoaderExampleText = () => (

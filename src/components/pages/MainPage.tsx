@@ -1,4 +1,4 @@
-import { Button, Card, CardGroup } from 'semantic-ui-react'
+import { Card, CardGroup } from 'semantic-ui-react'
 import "./Page.scss"
 import { Link } from 'react-router'
 

@@ -1,5 +1,5 @@
 import './Header.scss'
-import { Button, Input, Image } from "semantic-ui-react";
+import { Button, Input } from "semantic-ui-react";
 import logo from "../../assets/logo.png"
 import { addTokenToInstance, axiosInstance, removeTokenFromInstance } from '../../axios/aciosInstance';
 import { useNavigate } from 'react-router';
